@@ -13,7 +13,7 @@ def get_engine():
     db_name = os.getenv("DB_NAME")
 
     connection_string = (
-        f"mlsql+mysqlconnector://{user}:{password}@{host}:{port}/{db_name}"
+        f"mysql+mysqlconnector://{user}:{password}@{host}:{port}/{db_name}"
     )
 
     engine = create_engine(connection_string)
@@ -23,7 +23,7 @@ def get_engine():
 if __name__ == "__main__":
     engine = get_engine()
     try:
-        with engine.connect as conn:
+        with engine.connect() as conn:
             print("Connected successfully")
     except Exception as e:
         print("Connection failed: ", e)
