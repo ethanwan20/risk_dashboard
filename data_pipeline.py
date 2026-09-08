@@ -5,9 +5,8 @@ from db_connection import get_engine
 
 def get_prices(tickers, start_date = "2019-01-01", end_date = None):
     raw = yf.download(tickers, start = start_date, end = end_date)["Close"]
-
     long_df = raw.reset_index().melt(
-        id_vars="Date", var_name="ticker", value_name="closer_price"
+        id_vars="Date", var_name="ticker", value_name="close_price"
     )
     long_df = long_df.rename(columns={"Date": "price_date"})
     long_df = long_df.dropna(subset=["close_price"])
